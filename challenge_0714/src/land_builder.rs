@@ -14,8 +14,7 @@ impl LandBuilder {
         let mut current_land_mass: Option<Land> = None;
 
         for (index, value) in self.values.iter().enumerate() {
-            current_land_mass =
-                Self::incorporate_land_value(index, *value, current_land_mass, &mut land_masses);
+            current_land_mass = Self::parse_value_into_land(index, *value, current_land_mass, &mut land_masses);
         }
 
         match current_land_mass {
@@ -26,7 +25,7 @@ impl LandBuilder {
         land_masses
     }
 
-    fn incorporate_land_value(index: usize, value: u32, current_land_mass: Option<Land>, land_masses: &mut Vec<Land>) -> Option<Land> {
+    fn parse_value_into_land(index: usize, value: u32, current_land_mass: Option<Land>, land_masses: &mut Vec<Land>) -> Option<Land> {
         if value == 0 {
             if let Some(mut current) = current_land_mass {
                 current.increase();

@@ -11,17 +11,18 @@ impl IslandMerger {
         IslandMerger { islands_by_lines }
     }
 
+    // TODO This is too compliacated to read. It needs better variable names and less nesting.
     pub fn merge(&self) -> Vec<Island> {
         let mut completed_islands = Vec::new();
         let mut previous_islands = Vec::new();
 
         for islands in &self.islands_by_lines {
-            let non_adjacent_islands = Self::remove_non_adjacent(&mut previous_islands, islands);
-            completed_islands.extend_from_slice(&non_adjacent_islands);
+            let unconnected = Self::remove_without_neighbours(&mut previous_islands, islands);
+            completed_islands.extend_from_slice(&unconnected);
 
-            let overlapped_islands = Self::remove_overlapping(&mut previous_islands, islands);
-            let merged_overlaps = Self::merge_overlapped(&overlapped_islands);
-            previous_islands.extend_from_slice(&merged_overlaps);
+            let connected_islands = Self::remove_connected(&mut previous_islands, islands);
+            let merged_islands = Self::merge_connected(&connected_islands);
+            previous_islands.extend_from_slice(&merged_islands);
 
             for previous_island in &mut previous_islands {
                 let adjacent_islands = islands
@@ -29,7 +30,7 @@ impl IslandMerger {
                     .filter(|island| island.is_adjacent(&previous_island))
                     .map(|island| island.clone())
                     .collect();
-                previous_island.incorporate(&adjacent_islands);
+                previous_island.join_lands_as_bottom(&adjacent_islands);
             }
             let newly_emerging = Self::select_newly_emerging(&previous_islands, islands);
             previous_islands.extend_from_slice(&newly_emerging);
@@ -38,8 +39,8 @@ impl IslandMerger {
         completed_islands
     }
 
-    fn merge_overlapped(overlapped_islands: &HashMap<Island, Vec<Island>>) -> Vec<Island> {
-        overlapped_islands
+    fn merge_connected(connected: &HashMap<Island, Vec<Island>>) -> Vec<Island> {
+        connected
             .iter()
             .map(|(_island, overlapped)| {
                 overlapped
@@ -58,7 +59,7 @@ impl IslandMerger {
             .collect()
     }
 
-    fn remove_non_adjacent(previous_islands: &Vec<Island>, islands: &Vec<Island>) -> Vec<Island> {
+    fn remove_without_neighbours(previous_islands: &Vec<Island>, islands: &Vec<Island>) -> Vec<Island> {
         previous_islands
             .iter()
             .filter(|previous| !islands.iter().any(|island| previous.is_adjacent(island)))
@@ -66,8 +67,8 @@ impl IslandMerger {
             .collect()
     }
 
-    fn remove_overlapping(previous_islands: &mut Vec<Island>, islands: &Vec<Island>) -> HashMap<Island, Vec<Island>> {
-        let mut result = HashMap::new();
+    fn remove_connected(previous_islands: &mut Vec<Island>, islands: &Vec<Island>) -> HashMap<Island, Vec<Island>> {
+        let mut removed = HashMap::new();
 
         for island in islands {
             let overlapping: Vec<Island> = previous_islands
@@ -77,10 +78,10 @@ impl IslandMerger {
                 .collect();
             previous_islands.retain(|previous| !overlapping.contains(previous));
             if !overlapping.is_empty() {
-                result.insert(island.clone(), overlapping);
+                removed.insert(island.clone(), overlapping);
             }
         }
-        result
+        removed
     }
 
     fn select_newly_emerging(previous_islands: &Vec<Island>, islands: &Vec<Island>) -> Vec<Island> {

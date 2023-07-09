@@ -30,7 +30,7 @@ impl Island {
         self.area
     }
 
-    pub fn incorporate(&mut self, others: &Vec<Island>) {
+    pub fn join_lands_as_bottom(&mut self, others: &Vec<Island>) {
         self.lands.clear();
         for other in others {
             self.lands = other.lands.clone();
@@ -107,7 +107,7 @@ mod tests {
     }
     
     #[test]
-    fn incorporated_island_no_longer_adjacent_with_previous_land() {
+    fn joined_island_no_longer_adjacent_with_previous_land() {
         let land0 = Land::new(1);
         let mut land1 = Land::new(1);
         land1.increase();
@@ -120,7 +120,7 @@ mod tests {
         let island2 = Island::new(land2);
         assert!(island1.is_adjacent(&originally_adjacent));
 
-        island1.incorporate(&vec![island2]);
+        island1.join_lands_as_bottom(&vec![island2]);
 
         assert!(!island1.is_adjacent(&originally_adjacent));
     }

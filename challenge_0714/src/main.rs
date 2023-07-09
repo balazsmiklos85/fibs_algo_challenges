@@ -15,14 +15,14 @@ fn main() {
         vec![0, 0, 1],
         vec![1, 1, 0]];
 
-    let islands_by_lines: Vec<Vec<Island>> = matrix
+    let potential_islands_by_lines: Vec<Vec<Island>> = matrix
         .iter()
         .map(|row| LandBuilder::new(row.clone()))
         .map(|land_builder| land_builder.build())
         .map(|land_masses| IslandBuilder::new(land_masses))
         .map(|island_builder| island_builder.build())
         .collect();
-    let complete_islands: Vec<Island> = IslandMerger::new(islands_by_lines)
+    let complete_islands: Vec<Island> = IslandMerger::new(potential_islands_by_lines)
         .merge();
     let max_area = complete_islands.iter()
         .map(|island| island.area())
