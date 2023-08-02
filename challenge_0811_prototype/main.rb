@@ -26,7 +26,7 @@ class BinaryTree
   def next_inorder(node)
     return nil if node.nil?
 
-    first_right_parent(node) || leftmost_child(right_child(node))
+    first_right_parent(node) || leftmost(right_child(node))
   end
 
   def first_right_parent(node)
@@ -40,12 +40,12 @@ class BinaryTree
     first_right_parent parent
   end
 
-  def leftmost_child(node)
+  def leftmost(node)
     return nil if node.nil?
 
     return node if left_child(node).nil?
 
-    leftmost_child left_child(node)
+    leftmost left_child(node)
   end
 end
 
