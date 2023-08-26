@@ -1,4 +1,4 @@
-# FIBS Hungary algo challenges
+# My FIBS algo challenges
 
 My solutions to the "algo challenges" at work. Take them with a grain of salt.
 
