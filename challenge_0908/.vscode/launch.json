@@ -1,0 +1,45 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'challenge_0714'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=challenge_0714",
+                    "--package=challenge_0714"
+                ],
+                "filter": {
+                    "name": "challenge_0714",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'challenge_0714'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=challenge_0714",
+                    "--package=challenge_0714"
+                ],
+                "filter": {
+                    "name": "challenge_0714",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
