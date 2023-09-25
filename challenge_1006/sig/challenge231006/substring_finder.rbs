@@ -1,0 +1,7 @@
+module Challenge1006
+  class SubstringFinder
+    @characters: String
+
+    def find_shortest_substring_containing_all_characters: (target: String) -> String?
+  end
+end
