@@ -1,0 +1,29 @@
+module Challenge231006
+  class SingleIteratorStringFinder < SubstringFinder
+
+    @contains: CharacterCounter
+    @current_end: Integer
+    @current_start: Integer
+    @target: String
+
+    private
+
+    def count_extra: -> Integer
+
+    def current_substring: -> String
+
+    def extend!: -> bool
+
+    def initialize_substring: -> void
+
+    def match?: -> bool
+
+    def shorter_than?: -> bool
+
+    def shrink!: -> void
+
+    def shrinkable?: -> bool
+
+    def start!: -> void
+  end
+end

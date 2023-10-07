@@ -9,7 +9,7 @@ module Challenge231006
     # This method generates all possible substrings of the given characters, turns them into non-greedy regular
     # expressions, and then scans the target string for them. It returns the shortest substring it found.
     def find_shortest_substring_containing_all_characters(target)
-      @characters.split('') # "foo" => ["f", "o", "o"]
+      @characters.to_a # "foo" => ["f", "o", "o"]
                  .permutation # ["f", "o", "o"] => [["f", "o", "o"], ["f", "o", "o"], ["o", "f", "o"], ["o", "o", "f"], ["o", "f", "o"], ["o", "o", "f"]]
                  .uniq # repeated patterns are not needed
                  .map { |characters| characters.map { |character| Regexp.escape character } } # ["f", "o", "o", "$"] => ["f", "o", "o", "\$"]

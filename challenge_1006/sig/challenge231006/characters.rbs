@@ -1,0 +1,15 @@
+module Challenge231006
+  class CharacterCounter
+    @characters: Hash[String, Integer]
+
+    def each: () { (String, Integer) -> void } -> void
+
+    def empty?: -> bool
+
+    def include?: (character: (String | nil)) -> bool
+
+    def remove!: (character: String) -> CharacterCounter
+
+    def to_a: -> Array[String]
+  end
+end

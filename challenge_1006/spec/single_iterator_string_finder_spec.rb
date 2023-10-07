@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'challenge_231006/regexp_string_finder'
+require 'challenge_231006/single_iterator_string_finder'
 
-RSpec.describe Challenge231006::RegexpStringFinder do
+RSpec.describe Challenge231006::SingleIteratorStringFinder do
   describe '#find_shortest_substring_matching_containing_all_characters' do
-    let(:finder) { Challenge231006::RegexpStringFinder.new('$$abf') }
+    let(:finder) { Challenge231006::SingleIteratorStringFinder.new('$$abf') }
 
     it 'returns the shortest substring containing all characters' do
       expect(finder.find_shortest_substring_containing_all_characters('abcd$ef$axb$x$')).to eq('f$axb$')

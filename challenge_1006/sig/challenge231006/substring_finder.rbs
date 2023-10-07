@@ -1,6 +1,6 @@
-module Challenge1006
+module Challenge231006
   class SubstringFinder
-    @characters: String
+    @characters: CharacterCounter
 
     def find_shortest_substring_containing_all_characters: (target: String) -> String?
   end

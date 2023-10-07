@@ -1,7 +1,9 @@
-module Challenge1006
+module Challenge231006
   class IndexIteratorStringFinder
     private
 
     def find_first_substring_containing_characters: (target: String, start_index: Integer) -> String?
+
+    def shorter_of: (String, String) -> String
   end
 end

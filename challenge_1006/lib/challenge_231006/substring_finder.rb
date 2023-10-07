@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'character_counter'
+
 # Smallest Substring Containing
 #
 # You're given two non-empty strings: a big string and a small string. Write a function that returns the smallest substring in the big string that contains all of the small string's characters.
@@ -12,7 +14,7 @@ module Challenge231006
   # @type abstract
   class SubstringFinder
     def initialize(characters)
-      @characters = characters
+      @characters = CharacterCounter.new characters
     end
 
     # @type abstract
